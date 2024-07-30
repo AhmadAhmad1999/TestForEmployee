@@ -66,7 +66,8 @@ namespace SyriaTrustPlanning.Api.Controllers
 
             BaseResponse<object>? Response = await _Mediator.Send(new DeleteProductCommand()
             {
-                Id = Id
+                Id = Id,
+                Token = Token
             });
 
             return Response.statusCode switch
@@ -114,11 +115,6 @@ namespace SyriaTrustPlanning.Api.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> GetAllProducts(int? CategoryId, int Page = 1, int PerPage = 10)
         {
-            string? Token = HttpContext.Request.Headers.Authorization!;
-
-            if (Token.IsNullOrEmpty())
-                return Unauthorized();
-
             BaseResponse<List<GetAllProductsListVM>> Response = await _Mediator.Send(new GetAllProductsQuery()
             {
                 Page = Page,
@@ -145,11 +141,6 @@ namespace SyriaTrustPlanning.Api.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> GetProductById(int Id)
         {
-            string? Token = HttpContext.Request.Headers.Authorization!;
-
-            if (Token.IsNullOrEmpty())
-                return Unauthorized();
-
             BaseResponse<GetProductByIdDto> Response = await _Mediator.Send(new GetProductByIdQuery()
             {
                 Id = Id

@@ -9,5 +9,6 @@ namespace SyriaTrustPlanning.Application.Features.ProductFeatures.Commands.Updat
         public string Name { get; set; } = null!;
         public string Details { get; set; } = null!;
         public float Price { get; set; }
+        public string? Token { get; set; }
     }
 }

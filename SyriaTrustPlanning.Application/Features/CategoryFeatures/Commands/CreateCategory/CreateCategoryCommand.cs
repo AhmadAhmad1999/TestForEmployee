@@ -7,5 +7,6 @@ namespace SyriaTrustPlanning.Application.Features.CategoryFeatures.Commands.Crea
     {
         public string Name { get; set; } = null!;
         public string Details { get; set; } = null!;
+        public string? Token { get; set; }
     }
 }

@@ -66,7 +66,8 @@ namespace SyriaTrustPlanning.Api.Controllers
 
             BaseResponse<object>? Response = await _Mediator.Send(new DeleteCategoryCommand()
             {
-                Id = Id
+                Id = Id,
+                Token = Token
             });
 
             return Response.statusCode switch
@@ -114,11 +115,6 @@ namespace SyriaTrustPlanning.Api.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> GetAllCategorys(int Page = 1, int PerPage = 10)
         {
-            string? Token = HttpContext.Request.Headers.Authorization!;
-
-            if (Token.IsNullOrEmpty())
-                return Unauthorized();
-
             BaseResponse<List<GetAllCategoriesListVM>> Response = await _Mediator.Send(new GetAllCategoriesQuery()
             {
                 Page = Page,
@@ -144,11 +140,6 @@ namespace SyriaTrustPlanning.Api.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> GetCategoryById(int Id)
         {
-            string? Token = HttpContext.Request.Headers.Authorization!;
-
-            if (Token.IsNullOrEmpty())
-                return Unauthorized();
-
             BaseResponse<GetCategoryByIdDto> Response = await _Mediator.Send(new GetCategoryByIdQuery()
             {
                 Id = Id

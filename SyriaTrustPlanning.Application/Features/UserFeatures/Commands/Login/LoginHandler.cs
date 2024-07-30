@@ -25,9 +25,9 @@ namespace SyriaTrustPlanning.Application.Features.UserFeatures.Commands.Login
             User? UserToLogin = await _UserRepository
                 .FirstOrDefaultAsync(x => x.Email.ToLower() == Request.Email.ToLower());
 
-            if (UserToLogin is not null)
+            if (UserToLogin is null)
             {
-                ResponseMessage = "Email is already used";
+                ResponseMessage = "Invalid email or password";
 
                 return new BaseResponse<AuthenticationResponse>(ResponseMessage, false, 404);
             }

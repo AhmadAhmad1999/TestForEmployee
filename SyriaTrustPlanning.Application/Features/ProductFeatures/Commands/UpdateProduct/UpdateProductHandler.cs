@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
 using SharijhaAward.Application.Responses;
+using SyriaTrustPlanning.Application.Contract.Infrastructure;
 using SyriaTrustPlanning.Application.Contract.Persistence;
+using SyriaTrustPlanning.Domain.Entities.IdentityModels;
 using SyriaTrustPlanning.Domain.Entities.ProductModel;
 
 namespace SyriaTrustPlanning.Application.Features.ProductFeatures.Commands.UpdateProduct
@@ -10,16 +12,29 @@ namespace SyriaTrustPlanning.Application.Features.ProductFeatures.Commands.Updat
     {
         private readonly IAsyncRepository<Product> _ProductRepository;
         private readonly IMapper _Mapper;
+        private readonly IAsyncRepository<User> _UserRepository;
+        private readonly IJwtProvider _JWTProvider;
 
         public UpdateProductHandler(IMapper Mapper,
-            IAsyncRepository<Product> ProductRepository)
+            IAsyncRepository<Product> ProductRepository,
+            IAsyncRepository<User> UserRepository,
+            IJwtProvider JWTProvider)
         {
             _ProductRepository = ProductRepository;
             _Mapper = Mapper;
+            _UserRepository = UserRepository;
+            _JWTProvider = JWTProvider;
         }
 
         public async Task<BaseResponse<object>> Handle(UpdateProductCommand Request, CancellationToken cancellationToken)
         {
+            int UserId = _JWTProvider.GetUserIdFromToken(Request.Token!);
+
+            User? CheckUserId = await _UserRepository.FirstOrDefaultAsync(x => x.Id == UserId);
+
+            if (CheckUserId is null)
+                return new BaseResponse<object>("Unauthorized user", true, 401);
+
             string ResponseMessage = string.Empty;
 
             Product? ProductEntityToUpdate = await _ProductRepository

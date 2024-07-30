@@ -6,5 +6,6 @@ namespace SyriaTrustPlanning.Application.Features.ProductFeatures.Commands.Delet
     public class DeleteProductCommand : IRequest<BaseResponse<object>>
     {
         public int Id { get; set; }
+        public string? Token { get; set; }
     }
 }

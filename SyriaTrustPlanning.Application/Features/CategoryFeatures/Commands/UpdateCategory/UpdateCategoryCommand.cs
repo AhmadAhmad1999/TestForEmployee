@@ -8,5 +8,6 @@ namespace SyriaTrustPlanning.Application.Features.CategoryFeatures.Commands.Upda
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string Details { get; set; } = null!;
+        public string? Token { get; set; }
     }
 }

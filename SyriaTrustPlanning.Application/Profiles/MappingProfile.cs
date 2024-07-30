@@ -7,7 +7,9 @@ using SyriaTrustPlanning.Application.Features.ProductFeatures.Commands.CreatePro
 using SyriaTrustPlanning.Application.Features.ProductFeatures.Commands.UpdateProduct;
 using SyriaTrustPlanning.Application.Features.ProductFeatures.Queries.GetAllProducts;
 using SyriaTrustPlanning.Application.Features.ProductFeatures.Queries.GetProductById;
+using SyriaTrustPlanning.Application.Features.UserFeatures.Commands.SignUp;
 using SyriaTrustPlanning.Domain.Entities.CategoryModel;
+using SyriaTrustPlanning.Domain.Entities.IdentityModels;
 using SyriaTrustPlanning.Domain.Entities.ProductModel;
 
 namespace SyriaTrustPlanning.Application.Profiles
@@ -25,6 +27,8 @@ namespace SyriaTrustPlanning.Application.Profiles
             CreateMap<Product, UpdateProductCommand>().ReverseMap();
             CreateMap<Product, GetAllProductsListVM>().ReverseMap();
             CreateMap<Product, GetProductByIdDto>().ReverseMap();
+
+            CreateMap<User, SignUpCommand>().ReverseMap();
         }
     }
 }

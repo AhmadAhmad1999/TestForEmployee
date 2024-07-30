@@ -6,5 +6,6 @@ namespace SyriaTrustPlanning.Application.Features.CategoryFeatures.Commands.Dele
     public class DeleteCategoryCommand : IRequest<BaseResponse<object>>
     {
         public int Id { get; set; }
+        public string? Token { get; set; }
     }
 }

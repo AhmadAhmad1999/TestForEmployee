@@ -42,8 +42,9 @@ namespace SyriaTrustPlanning.Api.Controllers
 
             return Response.statusCode switch
             {
-                200 => Ok(Response),
                 404 => NotFound(Response),
+                200 => Ok(Response),
+                401 => Unauthorized(),
                 _ => BadRequest(Response)
             };
         }
@@ -74,6 +75,7 @@ namespace SyriaTrustPlanning.Api.Controllers
             {
                 404 => NotFound(Response),
                 200 => Ok(Response),
+                401 => Unauthorized(),
                 _ => BadRequest(Response)
             };
         }
@@ -100,6 +102,7 @@ namespace SyriaTrustPlanning.Api.Controllers
             {
                 404 => NotFound(Response),
                 200 => Ok(Response),
+                401 => Unauthorized(),
                 _ => BadRequest(Response)
             };
         }

@@ -3,6 +3,7 @@ using SharijhaAward.Application.Responses;
 using SyriaTrustPlanning.Application.Contract.Persistence;
 using SyriaTrustPlanning.Domain.Entities.IdentityModels;
 using SyriaTrustPlanning.Application.Contract.Infrastructure;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace SyriaTrustPlanning.Application.Features.UserFeatures.Commands.Login
 {
